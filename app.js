@@ -1,18 +1,20 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import cors from 'cors';
+import express from "express";
+import bodyParser from "body-parser";
+import cors from "cors";
+import dotenv from "dotenv";
 
-import { gradeRouter } from './routes/gradeRouter.js';
-import { logger } from './config/logger.js';
-import { db } from './models/index.js';
+import { gradeRouter } from "./routes/gradeRouter.js";
+import { logger } from "./config/logger.js";
+
+dotenv.config();
 
 (async () => {
   try {
-    await db.mongoose.connect(db.url, {
+    await mongoose.connect(process.env.MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    logger.info('Conectado ao banco de dados');
+    logger.info("Conectado ao banco de dados");
   } catch (error) {
     logger.error(`Erro ao conectar no banco de dados! ${error}`);
 
@@ -27,14 +29,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: 'http://localhost:8080',
+    origin: "http://localhost:8080",
   })
 );
 
 app.use(gradeRouter);
 
-app.get('/', (req, res) => {
-  res.send('API em execucao');
+app.get("/", (_, res) => {
+  res.send("API em execucao");
 });
 
 app.listen(process.env.PORT || 8081, () => {

@@ -19,12 +19,10 @@ const findAll = async (req, res) => {
   const name = req.query.name;
 
   //condicao para o filtro no findAll
-  var condition = name
-    ? { name: { $regex: new RegExp(name), $options: "i" } }
-    : {};
+  var condition = name ? { name: { $regex: name, $options: "i" } } : {};
 
   try {
-    const result = await gradeModel.find(name);
+    const result = await gradeModel.find(condition);
 
     res.send(result);
     logger.info(`GET /grade`);
@@ -101,4 +99,11 @@ const removeAll = async (req, res) => {
   }
 };
 
-export default { create, findAll, findOne, update, remove, removeAll };
+export default {
+  create,
+  findAll,
+  findOne,
+  update,
+  remove,
+  removeAll,
+};

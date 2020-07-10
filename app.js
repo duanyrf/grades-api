@@ -1,3 +1,4 @@
+import "dotenv/config.js";
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
@@ -27,7 +28,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: "http://localhost:8080",
+    origin: `http://localhost:${process.env.PORT_FRONTEND}`,
   })
 );
 

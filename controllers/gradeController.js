@@ -18,7 +18,7 @@ const create = async (req, res) => {
 const findAll = async (req, res) => {
   const name = req.query.name;
 
-  //condicao para o filtro no findAll
+  //condicao para o filtro no findAll.
   var condition = name ? { name: { $regex: name, $options: "i" } } : {};
 
   try {

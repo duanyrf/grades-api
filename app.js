@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: `http://localhost:${process.env.PORT_FRONTEND}`,
+    origin: process.env.ADDR_FRONTEND,
   })
 );
 
